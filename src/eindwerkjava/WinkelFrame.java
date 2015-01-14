@@ -7,6 +7,7 @@ package eindwerkjava;
 
 import DAL.Account;
 import DAL.Product;
+import DAL.WinkelWagen;
 import Services.Find;
 import Services.GetList;
 import java.util.ArrayList;
@@ -153,7 +154,8 @@ public class WinkelFrame extends javax.swing.JFrame {
             GetList list = new GetList();
             List<Product> ProductList = list.ProductByAccountList(account);
             for (Product p : ProductList) {
-                producten.add(p.getNaam() + " totaal: " + p.getTotaal());
+                WinkelWagen totaal = new Find().findWinkelwagenByMultyId(account.getId(), p.getId());
+                producten.add(p.getNaam() + " totaal: " + totaal.getTotaal());
             }
             lstProducten.setListData(producten.toArray());
         } catch (Exception ex) {

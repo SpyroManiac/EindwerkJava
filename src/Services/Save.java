@@ -93,7 +93,7 @@ public class Save {
         try
         {
             Find f = new Find();
-            long result = f.findWinkelwagenByAccountId(account.getId(), product.getId()).getId();
+            long result = f.findWinkelwagenByMultyId(account.getId(), product.getId()).getId();
             if(result== 0)
             {
             

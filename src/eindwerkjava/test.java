@@ -17,8 +17,8 @@ import javax.persistence.*;
 public class test {
     public static void main(String[] args) {
         Find f = new Find();
-        Account account = f.findAccountByName("test");
-        Product product = f.findProductByName("test");
+        Account account = f.findAccountByName("Jo");
+        Product product = f.findProductByName("cola");
         
         int SaveWinkelWagen = new Save().SaveWinkelWagen(account, product, 10);
         System.out.println(SaveWinkelWagen);

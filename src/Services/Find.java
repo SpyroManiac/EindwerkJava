@@ -120,7 +120,7 @@ public class Find {
             return nul;
         }
     }
-    public DAL.WinkelWagen findWinkelwagenByAccountId(long idAccount , long idProduct)
+    public DAL.WinkelWagen findWinkelwagenByMultyId(long idAccount , long idProduct)
     {
         try{
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
