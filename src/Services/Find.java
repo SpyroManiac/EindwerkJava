@@ -99,4 +99,46 @@ public class Find {
             return nul;
         }
     }
+    public DAL.WinkelWagen findWinkelwagenById(long id)
+    {
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+            EntityManager em = emf.createEntityManager();
+            
+            TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d WHERE d.id :Id", WinkelWagen.class);
+            WinkelWagen winkelWagen = query.setParameter("Id", id).getSingleResult();
+            
+            em.close();
+            emf.close();
+            return winkelWagen;
+        }
+
+        catch(Exception ex)
+        {
+            WinkelWagen nul = new WinkelWagen();
+            nul.setId(Long.parseLong("0"));
+            return nul;
+        }
+    }
+    public DAL.WinkelWagen findWinkelwagenByAccountId(long idAccount , long idProduct)
+    {
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+            EntityManager em = emf.createEntityManager();
+            
+            TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d WHERE d.AccountId = :IdAcc AND d.ProductId = :IdProd", WinkelWagen.class);
+            WinkelWagen winkelWagen = query.setParameter("IdAcc", idAccount).setParameter("IdProd", idProduct).getSingleResult();
+            
+            em.close();
+            emf.close();
+            return winkelWagen;
+        }
+
+        catch(Exception ex)
+        {
+            WinkelWagen nul = new WinkelWagen();
+            nul.setId(Long.parseLong("0"));
+            return nul;
+        }
+    }
 }

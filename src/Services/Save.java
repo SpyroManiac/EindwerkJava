@@ -5,6 +5,7 @@
  */
 package Services;
 
+import DAL.WinkelWagen;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -85,5 +86,41 @@ public class Save {
             System.out.println(ex.getMessage());
             return 1;
         }
+    }
+    
+    public int SaveWinkelWagen(DAL.Account account , DAL.Product product, int totaal)
+    {
+        try
+        {
+            Find f = new Find();
+            long result = f.findWinkelwagenByAccountId(account.getId(), product.getId()).getId();
+            if(result== 0)
+            {
+            
+                WinkelWagen w = new WinkelWagen();
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+                EntityManager em = emf.createEntityManager();
+
+                EntityTransaction trans = em.getTransaction();
+                w.setAccountId(account.getId());
+                w.setProductId(product.getId());
+                w.setTotaal(totaal);
+
+                trans.begin();
+                em.persist(w);
+                trans.commit();
+                em.close();
+                emf.close();
+       
+            }
+            else return 2;
+                
+        return 0;
+        }
+        catch(Exception ex)
+        {
+            return 1;
+        }
+        
     }
 }

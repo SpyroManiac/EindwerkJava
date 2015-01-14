@@ -30,6 +30,7 @@ public class ProductFrame extends javax.swing.JFrame {
         initComponents();
         RefreshList();
         btnSave.setVisible(false);
+        btnCancel.setVisible(false);
     }
 
     /**
@@ -61,8 +62,11 @@ public class ProductFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         txtFind = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Product");
+        setResizable(false);
 
         txtNaam.setEnabled(false);
 
@@ -140,6 +144,13 @@ public class ProductFrame extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setText("cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,15 +184,16 @@ public class ProductFrame extends javax.swing.JFrame {
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnUserList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(11, 11, 11))))
         );
         layout.setVerticalGroup(
@@ -217,7 +229,9 @@ public class ProductFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnUserList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel)))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,13 +317,17 @@ public class ProductFrame extends javax.swing.JFrame {
                 p.setPrijs(Double.parseDouble(txtPrijs.getText()));
                 p.setTotaal(Integer.parseInt(txtTotaal.getText()));
                 p.setId(Long.parseLong(txtID.getText()));
-                boolean result = update.UpdateProduct(p);
-                if(result == true)
+                int result = update.UpdateProduct(p);
+                if(result == 1)
                 {
                     JOptionPane.showMessageDialog(null, "Update gelukt");
                     RefreshList();
                     DisableText();
                     EnableButton();
+                }
+                else if(result == 2)
+                {
+                    JOptionPane.showMessageDialog(null, "Update gefaald , Naam bestaat al");
                 }
                 else
                 {
@@ -322,7 +340,7 @@ public class ProductFrame extends javax.swing.JFrame {
             }
         }
         catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Er is een probleem bij u inputs " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Er is een probleem bij u inputs: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -355,9 +373,14 @@ public class ProductFrame extends javax.swing.JFrame {
             lstItems.setListData(namen.toArray());
         }
         catch(Exception ex){
-            
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        EnableButton();
+        DisableText();
+    }//GEN-LAST:event_btnCancelActionPerformed
   
     private void RefreshList()
     {
@@ -410,6 +433,7 @@ public class ProductFrame extends javax.swing.JFrame {
         btnNew.setVisible(false);
         btnUserList.setVisible(false);
         btnSave.setVisible(true);
+        btnCancel.setVisible(true);
     }
     
     private void EnableButton()
@@ -419,6 +443,7 @@ public class ProductFrame extends javax.swing.JFrame {
         btnNew.setVisible(true);
         btnUserList.setVisible(true);
         btnSave.setVisible(false);
+        btnCancel.setVisible(false);
     }
     /**
      * @param args the command line arguments
@@ -457,6 +482,7 @@ public class ProductFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnNew;

@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @author Jo
  */
 public class Delete {
-    public boolean DeleteProduct(int id){
+    public boolean DeleteProduct(long id){
         try{
             Find f = new Find();
             Product p = f.findProductById(id);
@@ -23,8 +23,14 @@ public class Delete {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
             
+            TypedQuery<WinkelWagen> queryWinkel = em.createQuery("DELETE FROM WinkelWagen p WHERE p.ProductId = :Id",WinkelWagen.class);
+            queryWinkel.setParameter("Id", p.getId()).executeUpdate();
+                                  
             TypedQuery<Product> query = em.createQuery("DELETE FROM Product p WHERE p.id = :Id",Product.class);
             query.setParameter("Id", p.getId()).executeUpdate();
+            
+            
+            
             
             trans.commit();
             em.close();
@@ -37,7 +43,7 @@ public class Delete {
         return false;
         }
     }
-    public boolean DeleteAccount(int id){
+    public boolean DeleteAccount(long id){
         try{
             Find f = new Find();
             Account a = f.findAccountById(id);
@@ -45,6 +51,9 @@ public class Delete {
             EntityManager em = emf.createEntityManager();
             EntityTransaction trans = em.getTransaction();
             trans.begin();
+
+            TypedQuery<WinkelWagen> queryWinkel = em.createQuery("DELETE FROM WinkelWagen p WHERE p.AccountId = :Id",WinkelWagen.class);
+            queryWinkel.setParameter("Id", a.getId()).executeUpdate();
             
             TypedQuery<Account> query = em.createQuery("DELETE FROM Account p WHERE p.id = :Id",Account.class);
             query.setParameter("Id", a.getId()).executeUpdate();

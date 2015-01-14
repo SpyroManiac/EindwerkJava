@@ -6,16 +6,29 @@
 package Services;
 
 
+import java.util.List;
 import javax.persistence.*;
+import DAL.*;
+import java.util.Objects;
 
 /**
  *
  * @author Jo
  */
 public class Update {
-    public boolean UpdateProduct(DAL.Product product){
-        try{       
-            
+    public int UpdateProduct(DAL.Product product){
+        try{   
+            Boolean exists = false;
+            List<Product> prodlist = new GetList().ProductListByName(product.getNaam());
+            for(Product p: prodlist)
+            {
+                if(!Objects.equals(p.getId(), product.getId()))
+                {
+                    exists = true;
+                }
+            }
+            if(exists == false)
+            {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
             EntityManager em = emf.createEntityManager();
             EntityTransaction trans = em.getTransaction();
@@ -27,18 +40,30 @@ public class Update {
             em.close();
             emf.close();
       
-            return true;
+            return 1;
+            }
+            else return 2;
             
             
         }
         catch(Exception ex)
         {
-        return false;
+        return 0;
         }
     }
-    public boolean UpdateAccount(DAL.Account account){
-        try{
-            
+    public int UpdateAccount(DAL.Account account){
+        try{  
+            Boolean exists = false; 
+            List<Account> aclist = new GetList().AccountListByName(account.getNaam());
+            for(Account a: aclist)
+            {
+                if(!Objects.equals(a.getId(), account.getId()))
+                {
+                    exists = true;
+                }
+            }
+            if(exists == false)
+            {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
             EntityManager em = emf.createEntityManager();
             EntityTransaction trans = em.getTransaction();
@@ -50,12 +75,14 @@ public class Update {
             em.close();
             emf.close();
             
-            return true;
+            return 1;
+            }
+            else return 2;
             
         }
         catch(Exception ex)
         {
-        return false;
+        return 0;
         }
     }
 }

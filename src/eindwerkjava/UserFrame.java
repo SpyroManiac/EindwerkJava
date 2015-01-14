@@ -284,8 +284,9 @@ public class UserFrame extends javax.swing.JFrame {
                 a.setId(Long.parseLong(txtId.getText()));
                 a.setNaam(txtUser.getText());
                 a.setWachtwoord(txtWachtwoord.getText());
-                boolean result = update.UpdateAccount(a);
-                if(result == true)JOptionPane.showMessageDialog(null, "Update gelukt");
+                int result = update.UpdateAccount(a);
+                if(result == 1)JOptionPane.showMessageDialog(null, "Update gelukt");
+                else if(result == 2) JOptionPane.showMessageDialog(null, "Update niet gelukt, ItemNaam bestaat al");
                 else JOptionPane.showMessageDialog(null, "update niet gelukt");
             }
             else if(edit == false)

@@ -34,6 +34,27 @@ public class GetList {
         return list;
     }
     
+    public java.util.List<Account> AccountListByName(String naam)
+    {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+        EntityManager em = emf.createEntityManager();
+            
+        TypedQuery<Account> query = em.createQuery("SELECT d FROM Account d WHERE d.Naam = :Naam", Account.class).setParameter("Naam", naam );
+        java.util.List<Account> list = query.getResultList();
+        return list;
+    }
+    
+    public java.util.List<Product> ProductListByName(String naam)
+    {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+        EntityManager em = emf.createEntityManager();
+            
+        TypedQuery<Product> query = em.createQuery("SELECT d FROM Product d WHERE d.Naam = :Naam", Product.class).setParameter("Naam", naam);
+        java.util.List<Product> list = query.getResultList();
+        return list;
+    }
+    
+    
     public ArrayList<Product> ProductByAccountList(DAL.Account account)
     {
         System.out.println(account.getNaam() +" " + account.getId());
