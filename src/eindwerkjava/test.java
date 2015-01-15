@@ -16,11 +16,14 @@ import javax.persistence.*;
  */
 public class test {
     public static void main(String[] args) {
-        Find f = new Find();
-        Account account = f.findAccountByName("Jo");
-        Product product = f.findProductByName("cola");
+        WinkelWagen w = new Find().findWinkelwagenById(151);
+        System.out.println(w.getId() + " " + w.getProductId() + " " + w.getAccountId());
+        w.setTotaal(50000);
+        int UpdateWinkelwagen = new Update().UpdateWinkelwagen(w);
+        System.out.println(UpdateWinkelwagen);
+//        w.setTotaal(10);
+//        int UpdateWinkelwagen = new Update().UpdateWinkelwagen(w);
+//        System.out.println(w);
         
-        int SaveWinkelWagen = new Save().SaveWinkelWagen(account, product, 10);
-        System.out.println(SaveWinkelWagen);
     }
 }

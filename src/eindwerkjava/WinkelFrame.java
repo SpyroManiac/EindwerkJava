@@ -152,10 +152,10 @@ public class WinkelFrame extends javax.swing.JFrame {
             producten.clear();
             lstProducten.setListData(producten.toArray());
             GetList list = new GetList();
-            List<Product> ProductList = list.ProductByAccountList(account);
+            List<Product> ProductList = list.WinkelwagenByAccountList(account);
             for (Product p : ProductList) {
-                WinkelWagen totaal = new Find().findWinkelwagenByMultyId(account.getId(), p.getId());
-                producten.add(p.getNaam() + " totaal: " + totaal.getTotaal());
+                producten.add(p.getNaam() + " totaal: " + 
+                        new Find().findWinkelwagenByMultyId(account.getId(), p.getId()).getTotaal());
             }
             lstProducten.setListData(producten.toArray());
         } catch (Exception ex) {

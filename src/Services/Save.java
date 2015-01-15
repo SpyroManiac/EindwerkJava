@@ -94,7 +94,7 @@ public class Save {
         {
             Find f = new Find();
             long result = f.findWinkelwagenByMultyId(account.getId(), product.getId()).getId();
-            if(result== 0)
+            if(result== 0 && totaal <= product.getTotaal() )
             {
             
                 WinkelWagen w = new WinkelWagen();
@@ -106,6 +106,8 @@ public class Save {
                 w.setProductId(product.getId());
                 w.setTotaal(totaal);
 
+                product.setTotaal(product.getTotaal() - totaal);
+                new Update().UpdateProduct(product);
                 trans.begin();
                 em.persist(w);
                 trans.commit();
@@ -113,6 +115,7 @@ public class Save {
                 emf.close();
        
             }
+            else if(result== 0 && totaal > product.getTotaal()) return 3;
             else return 2;
                 
         return 0;

@@ -69,4 +69,54 @@ public class Delete {
         return false;
         }
     }
+    public boolean DeleteWinkelwagen(long id)
+    {
+        try{  
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+            EntityManager em = emf.createEntityManager();
+            EntityTransaction trans = em.getTransaction();
+            trans.begin();
+
+            TypedQuery<WinkelWagen> queryWinkel = em.createQuery("DELETE FROM WinkelWagen p WHERE p.id = :Id",WinkelWagen.class);
+            queryWinkel.setParameter("Id", id).executeUpdate();
+            
+            trans.commit();
+            em.close();
+            emf.close();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        return false;
+        }
+    }
+    public boolean DeleteWinkelwagenCanceled(long id)
+    {
+        try{
+            
+            
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+            EntityManager em = emf.createEntityManager();
+            EntityTransaction trans = em.getTransaction();
+            trans.begin();
+            
+            Product product = new Find().findProductById(new Find().findWinkelwagenById(id).getProductId());
+            product.setTotaal(product.getTotaal() + new Find().findWinkelwagenById(id).getTotaal());
+            new Update().UpdateProduct(product);
+
+            TypedQuery<WinkelWagen> queryWinkel = em.createQuery("DELETE FROM WinkelWagen p WHERE p.id = :Id",WinkelWagen.class);
+            queryWinkel.setParameter("Id", id).executeUpdate();
+            
+            trans.commit();
+            em.close();
+            emf.close();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        return false;
+        }
+    }
 }

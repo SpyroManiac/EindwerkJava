@@ -33,7 +33,6 @@ public class GetList {
         java.util.List<Product> list = query.getResultList();
         return list;
     }
-    
     public java.util.List<Account> AccountListByName(String naam)
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
@@ -42,8 +41,7 @@ public class GetList {
         TypedQuery<Account> query = em.createQuery("SELECT d FROM Account d WHERE d.Naam = :Naam", Account.class).setParameter("Naam", naam );
         java.util.List<Account> list = query.getResultList();
         return list;
-    }
-    
+    }  
     public java.util.List<Product> ProductListByName(String naam)
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
@@ -53,9 +51,27 @@ public class GetList {
         java.util.List<Product> list = query.getResultList();
         return list;
     }
+    public java.util.List<WinkelWagen> WinkelList()
+    {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+        EntityManager em = emf.createEntityManager();
+            
+        TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d", WinkelWagen.class);
+        java.util.List<WinkelWagen> list = query.getResultList();
+        return list;
+    }
     
+    public java.util.List<WinkelWagen> winkelListByIds(long idAccount, long idProduct)
+    {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
+        EntityManager em = emf.createEntityManager();
+            
+        TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d WHERE d.AccountId = :aId and d.ProductId = :pId", WinkelWagen.class).setParameter("aId", idAccount).setParameter("pId", idProduct);
+        java.util.List<WinkelWagen> list = query.getResultList();
+        return list;
+    }
     
-    public ArrayList<Product> ProductByAccountList(DAL.Account account)
+    public ArrayList<Product> WinkelwagenByAccountList(DAL.Account account)
     {
         System.out.println(account.getNaam() +" " + account.getId());
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");

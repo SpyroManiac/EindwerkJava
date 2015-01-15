@@ -23,6 +23,7 @@ public class ProductFrame extends javax.swing.JFrame {
     Update update = new Update();
     ArrayList<String> namen = new ArrayList<>();
     boolean edit = false;
+
     /**
      * Creates new form MainFrame
      */
@@ -245,30 +246,18 @@ public class ProductFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstItemsValueChanged
-
-        int result = lstItems.getSelectedIndex();
-        Product pResult = find.findProductByName(namen.get(result));
-        txtTotaal.setText(Integer.toString(pResult.getTotaal()));
-        txtID.setText(Long.toString(pResult.getId()));
-        txtKorting.setText(Double.toString(pResult.getKorting()));
-        txtNaam.setText(pResult.getNaam());
-        txtPrijs.setText(Double.toString(pResult.getPrijs()));
-        
-        
+        SetTextbox();
     }//GEN-LAST:event_lstItemsValueChanged
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        if(lstItems.getSelectedIndex() != -1)
-        {
+        if (lstItems.getSelectedIndex() != -1) {
             edit = true;
             txtTotaal.setEnabled(true);
             txtKorting.setEnabled(true);
             txtNaam.setEnabled(true);
             txtPrijs.setEnabled(true);
             DisableButton();
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "geen item geselecteerd");
         }
     }//GEN-LAST:event_btnEditActionPerformed
@@ -282,35 +271,29 @@ public class ProductFrame extends javax.swing.JFrame {
         edit = false;
         EnableText();
         DisableButton();
-        
+
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        try{
-            if(edit == false){
+        try {
+            if (edit == false) {
                 Product p = new Product();
                 p.setKorting(Double.parseDouble(txtKorting.getText()));
                 p.setNaam(txtNaam.getText());
                 p.setPrijs(Double.parseDouble(txtPrijs.getText()));
                 p.setTotaal(Integer.parseInt(txtTotaal.getText()));
                 int result = save.SaveProduct(p);
-                if(result == 1)
-                {
-                    JOptionPane.showMessageDialog(null, "Er was een probleem bij het opslagen " );
-                }
-                else if(result == 2)
-                {
-                   JOptionPane.showMessageDialog(null, "did item bestaat al");
-                }
-                else
-                {
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Er was een probleem bij het opslagen ");
+                } else if (result == 2) {
+                    JOptionPane.showMessageDialog(null, "did item bestaat al");
+                } else {
                     JOptionPane.showMessageDialog(null, "Opslagen geslaagd");
                     RefreshList();
                     DisableText();
                     EnableButton();
                 }
-            }
-            else if(edit == true){
+            } else if (edit == true) {
                 Product p = new Product();
                 p.setKorting(Double.parseDouble(txtKorting.getText()));
                 p.setNaam(txtNaam.getText());
@@ -318,61 +301,46 @@ public class ProductFrame extends javax.swing.JFrame {
                 p.setTotaal(Integer.parseInt(txtTotaal.getText()));
                 p.setId(Long.parseLong(txtID.getText()));
                 int result = update.UpdateProduct(p);
-                if(result == 1)
-                {
+                if (result == 1) {
                     JOptionPane.showMessageDialog(null, "Update gelukt");
                     RefreshList();
                     DisableText();
                     EnableButton();
-                }
-                else if(result == 2)
-                {
+                } else if (result == 2) {
                     JOptionPane.showMessageDialog(null, "Update gefaald , Naam bestaat al");
-                }
-                else
-                {
+                } else {
                     JOptionPane.showMessageDialog(null, "Update gefaald :(");
-                }  
-            }
-            else
-            {
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "Er is een probleem ,Jo kijk het na");
             }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Er is een probleem bij u inputs: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(lstItems.getSelectedIndex() != -1)
-        {
+        if (lstItems.getSelectedIndex() != -1) {
             delete.DeleteProduct(Integer.parseInt(txtID.getText()));
             DisableText();
             RefreshList();
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "geen item geselecteerd");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        try
-        {
+        try {
             namen.clear();
             GetList list = new GetList();
             List<Product> ProductList = list.ProductList();
-            for(Product p: ProductList)
-            {
-                if(p.getNaam().toLowerCase().contains(txtFind.getText().toLowerCase()))
-                {
+            for (Product p : ProductList) {
+                if (p.getNaam().toLowerCase().contains(txtFind.getText().toLowerCase())) {
                     namen.add(p.getNaam());
                 }
             }
             lstItems.setListData(namen.toArray());
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -380,28 +348,26 @@ public class ProductFrame extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         EnableButton();
         DisableText();
+        SetTextbox();
     }//GEN-LAST:event_btnCancelActionPerformed
-  
-    private void RefreshList()
-    {
-        try
-        {
+
+    private void RefreshList() {
+        try {
             namen.clear();
             GetList list = new GetList();
             List<Product> ProductList = list.ProductList();
-            for(Product p: ProductList)
-            {
+            for (Product p : ProductList) {
                 namen.add(p.getNaam());
             }
             lstItems.setListData(namen.toArray());
-        }
-        catch(Exception ex){
-            
+            lstItems.setSelectedIndex(0);
+            SetTextbox();
+        } catch (Exception ex) {
+
         }
     }
-    
-    private void EnableText()
-    {
+
+    private void EnableText() {
         txtTotaal.setEnabled(true);
         txtKorting.setEnabled(true);
         txtNaam.setEnabled(true);
@@ -412,9 +378,8 @@ public class ProductFrame extends javax.swing.JFrame {
         txtPrijs.setText("");
         txtTotaal.setText("");
     }
-    
-    private void DisableText()
-    {
+
+    private void DisableText() {
         txtTotaal.setEnabled(false);
         txtKorting.setEnabled(false);
         txtNaam.setEnabled(false);
@@ -425,9 +390,8 @@ public class ProductFrame extends javax.swing.JFrame {
         txtTotaal.setText("");
         txtID.setText("");
     }
-    
-    private void DisableButton()
-    {
+
+    private void DisableButton() {
         btnDelete.setVisible(false);
         btnEdit.setVisible(false);
         btnNew.setVisible(false);
@@ -435,9 +399,8 @@ public class ProductFrame extends javax.swing.JFrame {
         btnSave.setVisible(true);
         btnCancel.setVisible(true);
     }
-    
-    private void EnableButton()
-    {
+
+    private void EnableButton() {
         btnDelete.setVisible(true);
         btnEdit.setVisible(true);
         btnNew.setVisible(true);
@@ -445,6 +408,20 @@ public class ProductFrame extends javax.swing.JFrame {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);
     }
+    
+    private void SetTextbox()
+    {
+        if (lstItems.getSelectedIndex() != -1) {
+            int result = lstItems.getSelectedIndex();
+            Product pResult = find.findProductByName(namen.get(result));
+            txtTotaal.setText(Integer.toString(pResult.getTotaal()));
+            txtID.setText(Long.toString(pResult.getId()));
+            txtKorting.setText(Double.toString(pResult.getKorting()));
+            txtNaam.setText(pResult.getNaam());
+            txtPrijs.setText(Double.toString(pResult.getPrijs()));
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
