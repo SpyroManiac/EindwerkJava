@@ -105,7 +105,7 @@ public class Find {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
             EntityManager em = emf.createEntityManager();
             
-            TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d WHERE d.id :Id", WinkelWagen.class);
+            TypedQuery<WinkelWagen> query = em.createQuery("SELECT d FROM WinkelWagen d WHERE d.id = :Id", WinkelWagen.class);
             WinkelWagen winkelWagen = query.setParameter("Id", id).getSingleResult();
             
             em.close();
