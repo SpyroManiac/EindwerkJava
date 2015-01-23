@@ -5,7 +5,8 @@
  */
 package Services;
 
-import DAL.WinkelWagen;
+import DAL.*;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -30,6 +31,19 @@ public class Save {
             System.out.println(l);
             if(l == 0)
             {
+                long id = 0;
+                List<Account> resultlist = new GetList().AccountList();
+                if (!resultlist.isEmpty()) {
+                    for (Account a : resultlist) {
+                        if (id < a.getId()) {
+                            id = a.getId();
+                        }
+                    }
+                    id = id + 1;
+                } else {
+                    id = 1;
+                }
+                account.setId(id);
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
                 EntityManager em = emf.createEntityManager();
 
@@ -62,6 +76,19 @@ public class Save {
 
             if(l == 0)
             {
+                long id = 0;
+                List<Product> resultlist = new GetList().ProductList();
+                if (!resultlist.isEmpty()) {
+                    for (Product a : resultlist) {
+                        if (id < a.getId()) {
+                            id = a.getId();
+                        }
+                    }
+                    id = id + 1;
+                } else {
+                    id = 1;
+                }
+                product.setId(id);
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
                 EntityManager em = emf.createEntityManager();
 
@@ -96,7 +123,19 @@ public class Save {
             long result = f.findWinkelwagenByMultyId(account.getId(), product.getId()).getId();
             if(result== 0 && totaal <= product.getTotaal() )
             {
-            
+                long id = 0;
+                List<WinkelWagen> resultlist = new GetList().WinkelList();
+                if (!resultlist.isEmpty()) {
+                    for (WinkelWagen a : resultlist) {
+                        if (id < a.getId()) {
+                            id = a.getId();
+                        }
+                    }
+                    id = id + 1;
+                } else {
+                    id = 1;
+                }
+                
                 WinkelWagen w = new WinkelWagen();
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("EindwerkJavaPU");
                 EntityManager em = emf.createEntityManager();
@@ -105,6 +144,7 @@ public class Save {
                 w.setAccountId(account.getId());
                 w.setProductId(product.getId());
                 w.setTotaal(totaal);
+                w.setId(id);
 
                 product.setTotaal(product.getTotaal() - totaal);
                 new Update().UpdateProduct(product);
