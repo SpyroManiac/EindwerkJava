@@ -20,9 +20,9 @@ public class ResultsetConvert {
             Account a = new Account();
             while(result.next()){                
                 a.setId(result.getLong(1));
-                a.setAdmin(result.getBoolean(2));
-                a.setNaam(result.getString(3));
-                a.setWachtwoord(result.getString(4));           
+                a.setAdmin(result.getBoolean(4));
+                a.setNaam(result.getString(2));
+                a.setWachtwoord(result.getString(3));           
             }
             return a;
         } catch (Exception ex) {
