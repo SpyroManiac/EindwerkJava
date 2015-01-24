@@ -15,11 +15,12 @@
     </head>
     <body>
         <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
-        %><a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
-        
+            %><a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
+
 
         <%}
-            if (session.getAttribute("error") != null) {%><p><%= session.getAttribute("error")%></p><% session.removeAttribute("error");}
+            if (session.getAttribute("error") != null) {%><p><%= session.getAttribute("error")%></p><% session.removeAttribute("error");
+            }
             Long id;
             if (session.getAttribute("prodID") == null) {
                 id = Long.parseLong((String) request.getParameter("submit_id"));
@@ -35,8 +36,8 @@
                 double prijs = (p.getPrijs() - (p.getPrijs() / 100 * p.getKorting())) * 100;
                 prijs = Math.round(prijs);
                 prijs = prijs / 100;%>
-        <p>Korting: <%= p.getKorting()%></p>
-        <p>New price: <%= prijs%></p><%
+        <p>Discount: <%= p.getKorting()%>%</p>
+        <p>New price: €<%= prijs%></p><%
             }%>
         <p>Total left: <%= p.getTotaal()%></p>
         <% if (session.getAttribute("UserName") != null) {%>
@@ -45,6 +46,5 @@
                 <input type="hidden" value="<%= p.getId()%>" name="Aankoop"/>
                 <input type="submit" value="Buy" name="Aankoop"/></p></form>
         <%} else%><p>Log in to buy products</p>
-    </form>
 </body>
 </html>
