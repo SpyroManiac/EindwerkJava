@@ -14,11 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p><a href="Home.jsp">Home</a></p>
-        <%if (session.getAttribute("UserName") == null) {
-        %><a href="Login.jsp">Login</a><% } else {%><p>Hallo <%=session.getAttribute("UserName")%></p>
-        <p><a href="ProcessFolder/Logout.jsp">Logout</a></p>
-        <p><a href="WinkelLijst.jsp">Winkellist</a></p>
+        <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
+        %><a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
+        
 
         <%}
             if (session.getAttribute("error") != null) {%><p><%= session.getAttribute("error")%></p><% session.removeAttribute("error");}

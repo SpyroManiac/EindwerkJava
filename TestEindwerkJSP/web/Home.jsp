@@ -16,11 +16,10 @@
     </head>
     <body>
         <h1>Welcome to my shop</h1>
-        <p><a href="WinkelLijst.jsp">Winkellist</a></p>
+        
         <%
             if (session.getAttribute("UserName") == null) {
-        %><a href="Login.jsp">Login</a><% } else {%>  <p>Hallo <%=session.getAttribute("UserName")%></p>
-        <p><a href="ProcessFolder/Logout.jsp">Logout</a></p>
+        %><a href="Login.jsp">Login</a><% } else {%>  <p>Hallo <%=session.getAttribute("UserName")%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
 
         <%}
             List<Product> l = new GetList().ProductList();%>
