@@ -46,5 +46,5 @@
                 <input type="hidden" value="<%= p.getId()%>" name="Aankoop"/>
                 <input type="submit" value="Buy" name="Aankoop"/></p></form>
         <%} else%><p>Log in to buy products</p>
-</body>
+    </body>
 </html>
