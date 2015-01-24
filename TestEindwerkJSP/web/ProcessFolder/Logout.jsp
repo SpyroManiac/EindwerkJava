@@ -13,8 +13,8 @@
     </head>
     <body>
         <%
-            session.removeAttribute("username"); 
-            session.removeAttribute("password"); 
+            session.removeAttribute("UserName"); 
+            session.removeAttribute("error");
             session.invalidate();
             response.sendRedirect("../Home.jsp");
             %>

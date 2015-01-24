@@ -14,7 +14,7 @@
     <body>
         <h2>Your password or username is wrong</h2>
         <h2>Signup Details</h2>
-        <form action="ProcessFolder/testclasspage.jsp" method="post" role="form">
+        <form action="ProcessFolder/Login.jsp" method="post" role="form">
             <br/>Username:<input type="text" name="username">
             <br/>Password:<input type="password" name="password"> 
             <br/><input type="submit" value="Submit"> 

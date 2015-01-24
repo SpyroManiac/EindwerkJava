@@ -10,6 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -31,31 +32,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnProducten" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnGebruikders" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnWinkel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtProducten" max="32767" attributes="0"/>
-                          <Component id="txtGebruikers" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="btnProducten" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnGebruikders" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnWinkel" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Component id="btnRefresh" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtProducten" max="32767" attributes="0"/>
+                  <Component id="txtGebruikers" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,12 +78,12 @@
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnProducten" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnWinkel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnGebruikders" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProducten" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnWinkel" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnGebruikders" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnRefresh" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,12 +91,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aantal Producten:"/>
+        <Property name="text" type="java.lang.String" value="Total products:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aantal Gebruikers:"/>
+        <Property name="text" type="java.lang.String" value="Total users"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtProducten">
@@ -113,7 +111,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnProducten">
       <Properties>
-        <Property name="text" type="java.lang.String" value="producten"/>
+        <Property name="text" type="java.lang.String" value="products"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProductenActionPerformed"/>
@@ -121,7 +119,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnGebruikders">
       <Properties>
-        <Property name="text" type="java.lang.String" value="gebruikers"/>
+        <Property name="text" type="java.lang.String" value="users"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGebruikdersActionPerformed"/>
@@ -129,7 +127,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnWinkel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="winkelwagens"/>
+        <Property name="text" type="java.lang.String" value="shoppingcarts"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWinkelActionPerformed"/>
@@ -137,7 +135,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRefresh">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ververs"/>
+        <Property name="text" type="java.lang.String" value="refresh"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>

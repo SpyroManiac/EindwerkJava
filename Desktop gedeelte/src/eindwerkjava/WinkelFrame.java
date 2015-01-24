@@ -49,6 +49,7 @@ public class WinkelFrame extends javax.swing.JFrame {
         btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lstGebruiker.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -62,7 +63,7 @@ public class WinkelFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstGebruiker);
 
-        jLabel1.setText("Gebruiker");
+        jLabel1.setText("User");
 
         lstProducten.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -72,9 +73,9 @@ public class WinkelFrame extends javax.swing.JFrame {
         lstProducten.setFocusable(false);
         jScrollPane2.setViewportView(lstProducten);
 
-        jLabel2.setText("WinkelWagen");
+        jLabel2.setText("Shopingcart");
 
-        btnReturn.setText("terug");
+        btnReturn.setText("return");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);
@@ -95,7 +96,7 @@ public class WinkelFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(47, 47, 47)
                         .addComponent(btnReturn)))
@@ -154,7 +155,7 @@ public class WinkelFrame extends javax.swing.JFrame {
             GetList list = new GetList();
             List<Product> ProductList = list.WinkelwagenByAccountList(account);
             for (Product p : ProductList) {
-                producten.add(p.getNaam() + " totaal: " + 
+                producten.add(p.getNaam() + " total: " + 
                         new Find().findWinkelwagenByMultyId(account.getId(), p.getId()).getTotaal());
             }
             lstProducten.setListData(producten.toArray());

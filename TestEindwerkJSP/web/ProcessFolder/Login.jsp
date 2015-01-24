@@ -25,8 +25,7 @@
             if(s == true){
                 session.setAttribute("UserName", username);
                 response.sendRedirect("../Home.jsp");
-            }
-            
+            }        
             else response.sendRedirect("../ErrorLogin.jsp");
         %>
         

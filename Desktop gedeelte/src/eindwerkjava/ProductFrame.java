@@ -107,13 +107,13 @@ public class ProductFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Naam:");
+        jLabel2.setText("Name:");
 
-        jLabel3.setText("Prijs:");
+        jLabel3.setText("Price:");
 
-        jLabel4.setText("Totaal:");
+        jLabel4.setText("Total:");
 
-        jLabel5.setText("Korting:");
+        jLabel5.setText("Discount:");
 
         btnDelete.setText("delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public class ProductFrame extends javax.swing.JFrame {
 
         jLabel6.setText("search:");
 
-        btnSearch.setText("zoek");
+        btnSearch.setText("search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -159,7 +159,7 @@ public class ProductFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -169,14 +169,11 @@ public class ProductFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID)
-                            .addComponent(txtNaam)
-                            .addComponent(txtPrijs)
-                            .addComponent(txtTotaal)
-                            .addComponent(txtKorting, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())
+                    .addComponent(txtID)
+                    .addComponent(txtNaam)
+                    .addComponent(txtPrijs)
+                    .addComponent(txtTotaal)
+                    .addComponent(txtKorting, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -186,7 +183,7 @@ public class ProductFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnUserList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnUserList))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,8 +191,9 @@ public class ProductFrame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(11, 11, 11))))
+                                    .addComponent(btnCancel))))
+                        .addGap(1, 1, 1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +256,7 @@ public class ProductFrame extends javax.swing.JFrame {
             txtPrijs.setEnabled(true);
             DisableButton();
         } else {
-            JOptionPane.showMessageDialog(null, "geen item geselecteerd");
+            JOptionPane.showMessageDialog(null, "No item selected");
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -284,11 +282,11 @@ public class ProductFrame extends javax.swing.JFrame {
                 p.setTotaal(Integer.parseInt(txtTotaal.getText()));
                 int result = save.SaveProduct(p);
                 if (result == 1) {
-                    JOptionPane.showMessageDialog(null, "Er was een probleem bij het opslagen ");
+                    JOptionPane.showMessageDialog(null, "There was a problem saving");
                 } else if (result == 2) {
-                    JOptionPane.showMessageDialog(null, "did item bestaat al");
+                    JOptionPane.showMessageDialog(null, "This item already exists");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Opslagen geslaagd");
+                    JOptionPane.showMessageDialog(null, "Saved");
                     RefreshList();
                     DisableText();
                     EnableButton();
@@ -302,20 +300,20 @@ public class ProductFrame extends javax.swing.JFrame {
                 p.setId(Long.parseLong(txtID.getText()));
                 int result = update.UpdateProduct(p);
                 if (result == 1) {
-                    JOptionPane.showMessageDialog(null, "Update gelukt");
+                    JOptionPane.showMessageDialog(null, "Update done");
                     RefreshList();
                     DisableText();
                     EnableButton();
                 } else if (result == 2) {
-                    JOptionPane.showMessageDialog(null, "Update gefaald , Naam bestaat al");
+                    JOptionPane.showMessageDialog(null, "Update failed, Name already used");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Update gefaald :(");
+                    JOptionPane.showMessageDialog(null, "Update failed :(");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Er is een probleem ,Jo kijk het na");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Er is een probleem bij u inputs: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "There is a problem with the inputs: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -325,7 +323,7 @@ public class ProductFrame extends javax.swing.JFrame {
             DisableText();
             RefreshList();
         } else {
-            JOptionPane.showMessageDialog(null, "geen item geselecteerd");
+            JOptionPane.showMessageDialog(null, "No items selected");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

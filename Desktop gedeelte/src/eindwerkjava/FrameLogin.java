@@ -41,10 +41,11 @@ public class FrameLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jLabel1.setText("Naam:");
+        jLabel1.setText("Name:");
 
-        jLabel2.setText("Wachtwoord:");
+        jLabel2.setText("Password:");
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +68,7 @@ public class FrameLogin extends javax.swing.JFrame {
                     .addComponent(txtNaam)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 85, Short.MAX_VALUE))
+                        .addGap(0, 100, Short.MAX_VALUE))
                     .addComponent(pswWachtwoord))
                 .addContainerGap())
         );

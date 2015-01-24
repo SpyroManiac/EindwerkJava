@@ -18,9 +18,9 @@ public class Save {
     public int saveAccount(DAL.Account account) {
         try {
             Find f = new Find();
-            long l = f.findAccountByName(account.getNaam()).getId();   
+            long l = f.findAccountByName(account.getNaam()).getId();
             if (l == 0) {
-                
+
                 long id = 0;
                 List<Account> resultlist = new GetList().AccountList();
                 if (!resultlist.isEmpty()) {
@@ -57,7 +57,7 @@ public class Save {
             Find f = new Find();
             long l = f.findProductByName(product.getNaam()).getId();
             if (l == 0) {
-                
+
                 long id = 0;
                 List<Product> resultlist = new GetList().ProductList();
                 if (!resultlist.isEmpty()) {
@@ -70,7 +70,7 @@ public class Save {
                 } else {
                     id = 1;
                 }
-                
+
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/javaeindwerkdb", "root", "usbw");
                 PreparedStatement prepaired = connection.prepareStatement("INSERT INTO product (naam , korting, prijs,totaal,id) VALUES (?,?,?,?,?)");
 
@@ -109,7 +109,7 @@ public class Save {
                 } else {
                     id = 1;
                 }
-                
+
                 WinkelWagen w = new WinkelWagen();
 
                 w.setAccountId(account.getId());
@@ -127,14 +127,13 @@ public class Save {
 
                 product.setTotaal(product.getTotaal() - totaal);
                 new Update().UpdateProduct(product);
-
+                return 1;
             } else if (result == 0 && totaal > product.getTotaal()) {
                 return 3;
             } else {
                 return 2;
             }
 
-            return 1;
         } catch (Exception ex) {
             return 0;
         }
