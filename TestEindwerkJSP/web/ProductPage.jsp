@@ -1,12 +1,13 @@
 <%-- 
     Document   : ProductPage
-    Created on : 24-jan-2015, 12:45:33
+    Created on : 24-jan-2015, 13:28:17
     Author     : Jo
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAL.Product"%>
 <%@page import="services.Find"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,19 +22,20 @@
                 %> <a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">ShoppingCart</a></p>
 
 
-            <%}%></header><%
+            <%}%>
+        </header><%
             if (session.getAttribute("error") != null) {%><h2><%= session.getAttribute("error")%></h2><% session.removeAttribute("error");
-                }
-                Long id;
-                if (session.getAttribute("prodID") == null) {
-                    id = Long.parseLong((String) request.getParameter("submit_id"));
-                } else {
-                    id = Long.parseLong((String) session.getAttribute("prodID"));
-                    session.removeAttribute("prodID");
-                }
-                Product p = new Find().findProductById(id);
+            }
+            Long id;
+            if (session.getAttribute("prodID") == null) {
+                id = Long.parseLong((String) request.getParameter("submit_id"));
+            } else {
+                id = Long.parseLong((String) session.getAttribute("prodID"));
+                session.removeAttribute("prodID");
+            }
+            Product p = new Find().findProductById(id);
             %>
-        
+
         <h2>Product Name: <%=p.getNaam()%></h2>
         <p>price €<%= p.getPrijs()%></p>
         <% if (p.getKorting() != 0) {
