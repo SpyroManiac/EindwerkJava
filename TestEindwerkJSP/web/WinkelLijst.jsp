@@ -12,13 +12,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="CSS/MainCss.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
-        %><a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a><%}%></p>
-        
-        <h1>Winkellist</h1>
+        <header>
+            <h1>Java shop</h1>
+            <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
+                %> <a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a><%}%></p>
+        </header>
+        <h2>Shoppingcart</h2>
         <%
             if (session.getAttribute("error") != null) {
         %>
@@ -39,7 +42,7 @@
 
         %><table>
             <tr>
-                <td>Product name</td><td>Total price</td><td>Total</td>
+                <th>Product name</th><th>Total price</th><th colspan="2">Total</th>
             </tr><%                if (!productLijst.isEmpty()) {
                     double totaalPrijs = 0;
                     for (Product p : productLijst) {

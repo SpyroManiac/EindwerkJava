@@ -12,21 +12,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="CSS/MainCss.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome to my shop</h1>
-        
-        <%
-            if (session.getAttribute("UserName") == null) {
-        %><a href="Login.jsp">Login</a><% } else {%>  <p>Hallo <%=session.getAttribute("UserName")%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
+        <header>
+            <h1>Java shop</h1>
 
-        <%}
-            List<Product> l = new GetList().ProductList();%>
+            <%
+                if (session.getAttribute("UserName") == null) {
+            %> <p><a href="Login.jsp">Login</a></p><% } else {%>  <p>Hallo <%=session.getAttribute("UserName")%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">ShoppingCart</a></p>
 
+
+            <%}
+                List<Product> l = new GetList().ProductList();%>
+        </header>
         <table >
+            
             <tr>
-                <td>Product</td><td>Price</td><td>Check product</td>
+                <th>Product</th><th>Price</th><th>Check product</th>
             </tr>
             <% double prijs;
                 for (Product p : l) {

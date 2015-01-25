@@ -11,25 +11,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="CSS/MainCss.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
-            %><a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">Winkellist</a></p>
+        <header>
+            <h1>Java shop</h1>
+            <p><a href="Home.jsp">Home</a><%if (session.getAttribute("UserName") == null) {
+                %> <a href="Login.jsp">Login</a><% } else {%> <a href="ProcessFolder/Logout.jsp">Logout</a> <a href="WinkelLijst.jsp">ShoppingCart</a></p>
 
 
-        <%}
-            if (session.getAttribute("error") != null) {%><p><%= session.getAttribute("error")%></p><% session.removeAttribute("error");
-            }
-            Long id;
-            if (session.getAttribute("prodID") == null) {
-                id = Long.parseLong((String) request.getParameter("submit_id"));
-            } else {
-                id = Long.parseLong((String) session.getAttribute("prodID"));
-                session.removeAttribute("prodID");
-            }
-            Product p = new Find().findProductById(id);
-        %>
+            <%}%></header><%
+            if (session.getAttribute("error") != null) {%><h2><%= session.getAttribute("error")%></h2><% session.removeAttribute("error");
+                }
+                Long id;
+                if (session.getAttribute("prodID") == null) {
+                    id = Long.parseLong((String) request.getParameter("submit_id"));
+                } else {
+                    id = Long.parseLong((String) session.getAttribute("prodID"));
+                    session.removeAttribute("prodID");
+                }
+                Product p = new Find().findProductById(id);
+            %>
+        
         <h2>Product Name: <%=p.getNaam()%></h2>
         <p>price €<%= p.getPrijs()%></p>
         <% if (p.getKorting() != 0) {

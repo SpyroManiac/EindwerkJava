@@ -9,15 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="CSS/MainCss.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <p><a href="Home.jsp">Home</a></p>
+        <header>
+            <h1>Java shop</h1>
+            <p><a href="Home.jsp">Home</a></p>
+        </header>
         <h2>Signup Details</h2>
+        <div class="Login">
         <form action="ProcessFolder/Login.jsp" method="post" role="form">
-            <br/>Username:<input type="text" name="username"/>
-            <br/>Password:<input type="password" name="password"/> 
-            <br/><input type="submit" value="Submit"/> 
-        </form> 
+            <table>
+                <tr><td>Username:</td><td><input type="text" name="username"/></td></tr>
+                <tr><td>Password:</td><td><input type="password" name="password"/> </td></tr>
+                <tr><td colspan="2" class="submit"><input type="submit" value="Submit"/> </td></tr>
+            </table>
+        </form> </div>
     </body>
 </html>

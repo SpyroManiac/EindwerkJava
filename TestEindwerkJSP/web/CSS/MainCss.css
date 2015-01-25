@@ -1,0 +1,71 @@
+*{margin: 0;
+	padding: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;}
+
+body{
+    background-color: #277554;
+    font-size: 30px;
+}
+
+header{
+    background-color: #75AF96;
+    padding-bottom: 30px;
+    padding-left: 0px;
+}
+
+header h1{
+    font-size: xx-large;
+    margin-left: 25px;
+    padding: 10px;
+    color: #003B22;
+    float:left;
+}
+
+table{
+    margin: 20px;
+    border-collapse: collapse;
+}
+
+body p, body a, body table{
+    color: #75AF96;
+    padding: 5px; 
+    padding-left: 25px;
+}
+
+td{
+    color:#75AF96;
+    padding: 10px; 
+}
+
+body h2 {
+    margin-top: 20px;
+    font-size: 30px;
+    color: #001E11;
+    margin-left: 20px;
+}
+
+header p,header a{
+   text-align: right;
+   padding: 10px;
+   color: #003B22;
+}
+
+th , h2{
+    color: #001E11;
+    font-size: 35px;
+    padding:10px;
+}
+
+table , tr , th{
+    border: black solid 2px;
+}
+
+.submit{
+    text-align: right;
+}
+
+.Login table, .Login tr , .Login th{
+    border: 0px;
+}
